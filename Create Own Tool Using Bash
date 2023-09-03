@@ -1,0 +1,45 @@
+#!/bin/bash
+clear
+figlet -c "RKC Solutions"
+read -p "Enter The Domain: " domain
+echo "1.Nmap Scan"
+echo "2.Subdomain finder"
+echo "3.Reverse-ip"
+echo "4.Nikto"
+echo "5.Web response"
+echo "6.System Update"
+echo "7.A for all"
+
+read -p "Enter an Option To Continue With: " option
+
+case $option in
+        1)
+                nmap -sV -p- -v $domain
+                ;;
+        2)
+                sublist3r -d $domain
+                ;;
+        3)
+                reverse-ip
+                ;;
+        4)
+                nikto -h $domain
+                ;;
+        5)
+                curl $domain
+                ;;
+        6)
+                apt-get update -y
+                ;;
+        7)
+                nmap -sV -p- -v $domain
+                sublist3r -d $domain
+                reverse-ip
+                nikto -h $domain
+                curl $domain
+                ;;
+        *)
+                echo "invalid option"
+                exit
+                ;;
+esac	
